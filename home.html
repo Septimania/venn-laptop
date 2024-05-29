@@ -1,0 +1,247 @@
+<!DOCTYPE html> 
+<html>
+  	<head>
+		<title>Logiciels PC</title>
+		<script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-core.min.js"></script>
+		<script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-venn.min.js"></script>
+		<script src="https://cdn.anychart.com/releases/8.9.0/themes/pastel.min.js"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital@0;1&display=swap" rel="stylesheet">
+		<style>
+		  html,
+		  body,
+		  #containerVenn {
+			width: 100%;
+			height: 70vh;
+			margin: 0;
+			padding: 0;
+		  }
+		</style>
+		<style>
+			@font-face { font-family: TUF; src: url('NFLVIKIN.TTF'); }
+			@font-face { font-family: NITRO; src: url('Teko-Regular.ttf'); } 
+		</style>
+  	</head>
+	<body style="font-family: Arial, sans-serif; font-weight: bold;">
+		<header style="height: 48px; background-color: black">
+
+		</header>
+		<main style="min-height: calc(98.5vh - 96px);">
+			<div style="text-align: center;">Logiciels installés</div>
+			<br>
+			<div id="containerVenn"></div>
+			<script>
+				
+				function laptopChanged()
+				{
+					document.getElementById("containerVenn").innerHTML = "";
+					
+					let logicielsNitro = ["MICROSOFT OFFICE",
+										 "ADOBE CREATIVE CLOUD ET TECHNICAL COMMUNICATION SUTE",
+										 "UNITY 3D",
+										 "AUTODESK AUTOCAD",
+										 "AUTODESK FABRICATION",
+										 "AUTODESK ROBOT",
+										 "AUTODESK INFODRAINAGE",
+										 "AUTODESK DWG TRUEVIEW",
+										 "AUTODESK FEATURECAM",
+										 "AUTODESK PARTMAKER",
+										 "CELSYS CLIP STUDIO PAINT",
+										 "SKETCHUP",
+										 "MCNEEL RHINO",
+										 "VISUAL STUDIO",
+										 "SQL SERVER",
+										 "XAMPP",
+										 "DASSAULT SOLIDWORKS",
+										 "HYPERX NGENUITY",
+										 "REALLUSION CARTOON ANIMATOR 5",
+										 "BURP SUITE",
+										 "PARAVIEW",
+										 "NVIDIA OMNIVERSE",
+										 "SIDEFX HOUDINI",
+										 "BUBBLES",
+										 "RAZER AXON",
+										 "VMWARE",
+										 "RIZOM UV",
+										 "SIEMENS NX",
+										 "ANSYS ADDITIVE",
+										 "ANSYS LUMERICAL",
+										 "ANSYS ZEMAX OPTICSTUDIO",
+										 "BENTLEY AUOPIPE",
+										 "BENTLEY RAM",
+										 "BENTLEY STAAD",
+										 "BENTLEY PLAXIS",
+										 "PROTA SOFTWARE",
+										 "AFT IMPULSE",
+										 "AFT MERCURY",
+										 "AQUAVEO GMS (Groundwater Modeling System)"];
+					let nitroNombre = 0;
+					let nitroText = "";
+
+					let logicielsTUF = ["MICROSOFT OFFICE",
+										 "ADOBE CREATIVE CLOUD ET TECHNICAL COMMUNICATION SUTE",
+										 "UNITY 3D",
+										 "AUTODESK DWG TRUEVIEW",
+										 "AUTODESK FEATURECAM",
+										 "AUTODESK PARTMAKER",
+										 "AUTODESK CFD",
+										 "AUTODESK INVENTOR",
+										 "AUTODESK MOLDFLOW",
+										 "AUTODESK NETFABB",
+										 "AUTODESK POWER",
+										 "AUTODESK VRED",
+										 "AUTODESK ARTCAM",
+										 "AUTODESK ALIAS",
+										 "FLEXSIM",
+										 "FOUNDRY NUKE",
+										 "FOUNDRY MODO",
+										 "FOUNDRY KATANA",
+										 "FOUNDRY HIERO",
+										 "CELSYS CLIP STUDIO PAINT",
+										 "MCNEEL RHINO",
+										 "VISUAL STUDIO",
+										 "SQL SERVER",
+										 "XAMPP",
+										 "CORSAIR ICUE",
+										 "BURP SUITE",
+										 "NVIDIA OMNIVERSE",
+										 "BUBBLES",
+										 "RAZER AXON",
+										 "VMWARE",
+										 "RIZOM UV",
+										 "SIEMENS TECNOMATIX",
+										 "ANSYS ELECTRONICS",
+										 "ANSYS LUMERICAL",
+										 "ANSYS ZEMAX OPTICSTUDIO",
+										 "BENTLEY AUOPIPE",
+										 "BENTLEY RAM",
+										 "BENTLEY STAAD",
+										 "BENTLEY MX ROAD",
+										 "PROTA SOFTWARE",
+										 "AFT XSTREAM",
+										 "AFT MERCURY"];
+					let tufNombre = 0;
+					let tufText = "";
+					
+					let logicielsNitruf = [];
+					let nitrufNombre = 0;
+					let nitrufText = "";
+					
+					if (document.getElementById('nitroBox').checked && document.getElementById('tufBox').checked)
+					{
+						logicielsNitruf = logicielsNitro.filter(value => logicielsTUF.includes(value));
+						
+						for (let i = 0; i < logicielsNitruf.length; i++) {
+							nitrufNombre += 1;
+							nitrufText += logicielsNitruf[i] + "\n";
+						}
+					}
+					
+					if (document.getElementById('nitroBox').checked)
+					{
+						let logicielsNitroUnique = logicielsNitro.filter(value => !logicielsNitruf.includes(value))
+						nitroNombre += logicielsNitro.length;
+						for (let i = 0; i < logicielsNitroUnique.length; i++) {
+						  nitroText += logicielsNitroUnique[i] + "\n";
+						}
+					}
+
+					if (document.getElementById('tufBox').checked)
+					{
+						let logicielsTUFUnique = logicielsTUF.filter(value => !logicielsNitruf.includes(value))
+						tufNombre += logicielsTUF.length;
+						for (let i = 0; i < logicielsTUFUnique.length; i++) {
+						  tufText += logicielsTUFUnique[i] + "\n";
+						}
+					}
+						
+
+					  var data = [
+						//#region One
+						{
+						  x: 'LANGUEDOC-NITRO',
+						  name: '',
+						  value: nitroNombre,
+						  tooltipTitle: 'LANGUEDOC-NITRO',
+						  tooltipDesc: nitroText,
+						  normal: {fill: "#ff0000 0.7"},
+						  hovered: {fill: "#ff0000 1"},
+						  selected: {fill: "#ff0000 1"}
+						},
+						{
+						  x: 'SEPTUFMANIE',
+						  name: '',
+						  value: tufNombre,
+						  tooltipTitle: 'SEPTUFMANIE',
+						  tooltipDesc: tufText,
+						  normal: {fill: "#ffcc00 0.7"},
+						  hovered: {fill: "#ffcc00 1"},
+						  selected: {fill: "#ffcc00 1"}
+						},
+						//#endregion
+
+						{
+						  x: ['LANGUEDOC-NITRO', 'SEPTUFMANIE'],
+						  value: nitrufNombre,
+						  name: '',
+						  tooltipTitle: 'LANGUEDOC-NITRO & SEPTUFMANIE',
+						  tooltipDesc: nitrufText,
+						  normal: {fill: "#ff6f00 0.1"},
+						  hovered: {fill: "#ff6f00 1"},
+						  selected: {fill: "#ff6f00 1"},
+						  hatchFill: {
+							type:"weave",
+							color: "#ff0000"
+						  }
+						}
+					  ];
+
+					  var chart = anychart.venn(data);
+
+					  chart.stroke('1 #fff');
+
+					  chart
+						.labels()
+						.fontSize(16)
+						.fontColor('#5e6469')
+						.hAlign("center")
+						.vAlign("center")
+						.fontFamily('Roboto, sans-serif')
+						.fontWeight('500')
+						.format('{%Name}');
+
+					  chart
+						.intersections()
+						.labels()
+						.fontStyle('italic')
+						.fontColor('#fff')
+						.format('{%Name}');
+
+					  chart.legend(false);
+
+					  chart
+						.tooltip()
+						.titleFormat('{%tooltipTitle}')
+						.format("{%tooltipDesc}")
+						.background().fill("#000 0.5");
+
+					  chart.container('containerVenn');
+					  chart.draw();
+					}
+
+			</script>
+
+			<br>
+			<br>
+			<fieldset>
+				<legend>Sélectionner les PC concernés</legend>
+				<div style="display: flex; justify-content: center; align-items: center; vertical-align: center;">
+					<input type="checkbox" id="nitroBox" value="LANGUEDOC-NITRO" style="accent-color: rgba(255,0,0);" onChange="laptopChanged()"><label style="font-family: NITRO; color: rgba(255,0,0); font-size: 18px; margin-right: 20px;">LANGUEDOC-NITRO</label>
+					<input type="checkbox" id="tufBox" value="SEPTUFMANIE" style="accent-color: rgba(255,192,0);" onChange="laptopChanged()"><label style="font-family: TUF; color: rgba(255,192,0); font-size: 18px; margin-right: 20px;">SEPTUFMANIE</label>
+				</div>
+			</fieldset>
+		</main>
+		<footer style="height: 48px; background-color: black">
+
+		</footer>
+	</body>
+</html>
