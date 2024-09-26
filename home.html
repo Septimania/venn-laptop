@@ -19,6 +19,7 @@
 		<style>
 			@font-face { font-family: TUF; src: url('NFLVIKIN.TTF'); }
 			@font-face { font-family: NITRO; src: url('Teko-Regular.ttf'); } 
+			@font-face { font-family: VICTUS; src: url('Zekton.ttf'); } 
 		</style>
   	</head>
 	<body style="font-family: Arial, sans-serif; font-weight: bold;">
@@ -26,11 +27,11 @@
 
 		</header>
 		<main style="min-height: calc(98.5vh - 96px);">
-			<div style="text-align: center;">Logiciels installés</div>
+			<div style="text-align: center; font-size:18pt;">Logiciels installés</div>
 			<br>
 			<div id="containerVenn"></div>
 			<script>
-				
+			
 				function laptopChanged()
 				{
 					document.getElementById("containerVenn").innerHTML = "";
@@ -140,8 +141,8 @@
 										 "PROTA SOFTWARE",
 										 "AFT XSTREAM",
 										 "AFT MERCURY",
-							    			 "VMWARE",
-							    			 "CORESPEC 3D",
+										 "VMWARE",
+										 "CORESPEC 3D",
 										 "DLUBAL RFEM",
 										 "GRAITEC ADVANCE DESIGN",
 										 "GRAITEC OMD",
@@ -149,48 +150,191 @@
 										 "GRAITEC TREPCAD",
 										 "GRAITEC TRICALC",
 										 "ALTAIR ACTIVATE",
-							    			 "ALTAIR COMPOSE",
+										 "ALTAIR COMPOSE",
 										 "ALTAIR EMBED",
 										 "ALTAIR PSIM",
 										 "ALTAIR TWIN ACTIVATE",
-							   			 "GNS3",
+										 "GNS3",
 										 "CISCO PACKET TRACER",
 										 "DOCKER"];
 					let tufNombre = 0;
 					let tufText = "";
 					
+					let logicielsVictus = ["MICROSOFT OFFICE",
+										 "ADOBE CREATIVE CLOUD ET TECHNICAL COMMUNICATION SUITE",
+										 "UNITY 3D",
+										 "AUTODESK DWG TRUEVIEW",
+										 "AUTODESK FEATURECAM",
+										 "AUTODESK PARTMAKER",
+										 "AUTODESK MOTIONBUILDER",
+										 "AUTODESK MUDBOX",
+										 "CELSYS CLIP STUDIO PAINT",
+										 "MCNEEL RHINO",
+										 "VISUAL STUDIO",
+										 "SQL SERVER",
+										 "XAMPP",
+										 "DASSAULT GEOVIA",
+										 "RAZER SYNAPSE",
+										 "REALLUSION CHARACTER CREATION 4",
+										 "REALLUSION ICLONE 8",
+										 "BURP SUITE",
+										 "NVIDIA OMNIVERSE",
+										 "BUBBLES",
+										 "RAZER AXON",
+										 "VMWARE",
+										 "PARAVIEW",
+										 "SIEMENS TEAMCENTER",
+										 "SIEMENS SIMCENTER",
+										 "SIEMENS FLOMASTER",
+										 "ANSYS ELECTRONICS",
+										 "ANSYS LUMERICAL",
+										 "PLANTFACTORY",
+										 "BENTLEY GEOSTRUCTURAL ANALYSIS",
+										 "BENTLEY LIMCON",
+										 "BENTLEY SEWERGEMS",
+										 "BENTLEY STORMCAD",
+										 "BENTLEY WATERGEMS",
+										 "BENTLEY CIVILSTORM",
+										 "PROTA SOFTWARE",
+										 "AFT ARROW",
+										 "AFT MERCURY",
+										 "VMWARE",
+										 "CORESPEC 3D",
+										 "AQUAVEO WMS (Watershed Modeling System)",
+										 "DLUBAL CRANEWAY",
+										 "DLUBAL PLATE-BUCKLING",
+										 "GLOBAL MAPPER",
+										 "PTC CREO",
+										 "PTC MATHCAD PRIME",
+										 "SCHLUMBERGER AQUACHEM 12",
+										 "SCHLUMBERGER HYDRO GEOANALYST",
+										 "CABINET VISION",
+										 "ALTAIR EDEM",
+										 "ALTAIR FEKO",
+										 "ALTAIR FLUX & ALTAIR FLUXMOTOR",
+										 "ALTAIR POLLEX",
+							   			 "GNS3",
+										 "CISCO PACKET TRACER",
+										 "DOCKER"];
+					let victusNombre = 0;
+					let victusText = "";
+					
 					let logicielsNitruf = [];
 					let nitrufNombre = 0;
 					let nitrufText = "";
 					
-					if (document.getElementById('nitroBox').checked && document.getElementById('tufBox').checked)
-					{
-						logicielsNitruf = logicielsNitro.filter(value => logicielsTUF.includes(value));
-						
-						for (let i = 0; i < logicielsNitruf.length; i++) {
-							nitrufNombre += 1;
-							nitrufText += logicielsNitruf[i] + "\n";
-						}
-					}
+					let logicielsVictro = [];
+					let victroNombre = 0;
+					let victroText = "";
+					
+					let logicielsVictuf = [];
+					let victufNombre = 0;
+					let victufText = "";
+					
+					let logicielsVictruf = [];
+					let victrufNombre = 0;
+					let victrufText = "";
 					
 					if (document.getElementById('nitroBox').checked)
 					{
-						let logicielsNitroUnique = logicielsNitro.filter(value => !logicielsNitruf.includes(value))
+						if (document.getElementById('tufBox').checked)
+						{
+							if (document.getElementById('victusBox').checked)
+							{
+								logicielsVictruf = logicielsNitro.filter(value => (logicielsTUF.includes(value) && logicielsVictus.includes(value)));
+								victrufNombre += logicielsVictruf.length;
+								for (let i = 0; i < logicielsVictruf.length; i++) {
+									victrufText += logicielsVictruf[i] + "\n";
+								}
+								
+								logicielsVictro = logicielsNitro.filter(value => logicielsVictus.includes(value));
+								victroNombre += logicielsVictro.length;
+								logicielsVictro = logicielsNitro.filter(value => (logicielsVictus.includes(value) && !logicielsVictruf.includes(value)));
+								for (let i = 0; i < logicielsVictro.length; i++) {
+									victroNombre += 1;
+									victroText += logicielsVictro[i] + "\n";
+								}
+								
+								logicielsVictuf = logicielsTUF.filter(value => logicielsVictus.includes(value));
+								victufNombre += logicielsVictuf.length;
+								logicielsVictuf = logicielsTUF.filter(value => (logicielsVictus.includes(value) && !logicielsVictruf.includes(value)));
+								for (let i = 0; i < logicielsVictuf.length; i++) {
+									victufNombre += 1;
+									victufText += logicielsVictuf[i] + "\n";
+								}
+							
+								let logicielsVictusUnique = logicielsVictus.filter(value => !logicielsVictuf.includes(value) && !logicielsVictro.includes(value) && !logicielsVictruf.includes(value))
+								victusNombre += logicielsVictus.length;
+								for (let i = 0; i < logicielsVictusUnique.length; i++) {
+								  victusText += logicielsVictusUnique[i] + "\n";
+								}
+							}
+							
+							logicielsNitruf = logicielsNitro.filter(value => logicielsTUF.includes(value));
+							nitrufNombre += logicielsNitruf.length;
+							logicielsNitruf = logicielsNitro.filter(value => (logicielsTUF.includes(value) && !logicielsVictruf.includes(value)));
+							for (let i = 0; i < logicielsNitruf.length; i++) {
+								nitrufText += logicielsNitruf[i] + "\n";
+							}
+							
+							let logicielsTUFUnique = logicielsTUF.filter(value => (!logicielsNitruf.includes(value) && !logicielsVictuf.includes(value) && !logicielsVictruf.includes(value)))
+							tufNombre += logicielsTUF.length;
+							for (let i = 0; i < logicielsTUFUnique.length; i++) {
+							  tufText += logicielsTUFUnique[i] + "\n";
+							}
+						}
+						else if (document.getElementById('victusBox').checked)
+						{
+							logicielsVictro = logicielsNitro.filter(value => logicielsVictus.includes(value));
+							for (let i = 0; i < logicielsVictro.length; i++) {
+								victroNombre += 1;
+								victroText += logicielsVictro[i] + "\n";
+							}
+							
+							let logicielsVictusUnique = logicielsVictus.filter(value => !logicielsVictuf.includes(value) && !logicielsVictro.includes(value) && !logicielsVictruf.includes(value))
+							victusNombre += logicielsVictus.length;
+							for (let i = 0; i < logicielsVictusUnique.length; i++) {
+							  victusText += logicielsVictusUnique[i] + "\n";
+							}
+						}
+						
+						let logicielsNitroUnique = logicielsNitro.filter(value => (!logicielsNitruf.includes(value) && !logicielsVictro.includes(value) && !logicielsVictruf.includes(value)))
 						nitroNombre += logicielsNitro.length;
 						for (let i = 0; i < logicielsNitroUnique.length; i++) {
 						  nitroText += logicielsNitroUnique[i] + "\n";
 						}
 					}
-
-					if (document.getElementById('tufBox').checked)
+					else if (document.getElementById('tufBox').checked)
 					{
-						let logicielsTUFUnique = logicielsTUF.filter(value => !logicielsNitruf.includes(value))
+						if (document.getElementById('victusBox').checked)
+						{
+							logicielsVictuf = logicielsTUF.filter(value => logicielsVictus.includes(value));
+							for (let i = 0; i < logicielsVictuf.length; i++) {
+								victufNombre += 1;
+								victufText += logicielsVictuf[i] + "\n";
+							}
+							
+							let logicielsVictusUnique = logicielsVictus.filter(value => !logicielsVictuf.includes(value) && !logicielsVictro.includes(value) && !logicielsVictruf.includes(value))
+							victusNombre += logicielsVictus.length;
+							for (let i = 0; i < logicielsVictusUnique.length; i++) {
+							  victusText += logicielsVictusUnique[i] + "\n";
+							}
+						}
+						
+						let logicielsTUFUnique = logicielsTUF.filter(value => (!logicielsNitruf.includes(value) && !logicielsVictuf.includes(value) && !logicielsVictruf.includes(value)))
 						tufNombre += logicielsTUF.length;
 						for (let i = 0; i < logicielsTUFUnique.length; i++) {
 						  tufText += logicielsTUFUnique[i] + "\n";
 						}
 					}
-						
+					else if (document.getElementById('victusBox').checked)
+					{
+						let logicielsVictusUnique = logicielsVictus.filter(value => !logicielsVictuf.includes(value) && !logicielsVictro.includes(value) && !logicielsVictruf.includes(value))
+						victusNombre += logicielsVictus.length;
+						for (let i = 0; i < logicielsVictusUnique.length; i++) {
+						  victusText += logicielsVictusUnique[i] + "\n";
+						}
+					}
 
 					  var data = [
 						//#region One
@@ -214,8 +358,19 @@
 						  hovered: {fill: "#ffcc00 1"},
 						  selected: {fill: "#ffcc00 1"}
 						},
+						{
+						  x: 'VICTUS-ROUSSILLON',
+						  name: '',
+						  value: victusNombre,
+						  tooltipTitle: 'VICTUS-ROUSSILLON',
+						  tooltipDesc: victusText,
+						  normal: {fill: "#00ff00 0.7"},
+						  hovered: {fill: "#00ff00 1"},
+						  selected: {fill: "#00ff00 1"}
+						},
 						//#endregion
 
+						//#region Two
 						{
 						  x: ['LANGUEDOC-NITRO', 'SEPTUFMANIE'],
 						  value: nitrufNombre,
@@ -225,6 +380,50 @@
 						  normal: {fill: "#ff6f00 0.1"},
 						  hovered: {fill: "#ff6f00 1"},
 						  selected: {fill: "#ff6f00 1"},
+						  hatchFill: {
+							type:"weave",
+							color: "#ff0000"
+						  }
+						},
+						{
+						  x: ['LANGUEDOC-NITRO', 'VICTUS-ROUSSILLON'],
+						  value: victroNombre,
+						  name: '',
+						  tooltipTitle: 'LANGUEDOC-NITRO & VICTUS-ROUSSILLON',
+						  tooltipDesc: victroText,
+						  normal: {fill: "#ffff00 0.1"},
+						  hovered: {fill: "#ffff00 1"},
+						  selected: {fill: "#ffff00 1"},
+						  hatchFill: {
+							type:"weave",
+							color: "#ff0000"
+						  }
+						},
+						{
+						  x: ['SEPTUFMANIE', 'VICTUS-ROUSSILLON'],
+						  value: victufNombre,
+						  name: '',
+						  tooltipTitle: 'SEPTUFMANIE & VICTUS-ROUSSILLON',
+						  tooltipDesc: victufText,
+						  normal: {fill: "#ccff00 0.1"},
+						  hovered: {fill: "#ccff00 1"},
+						  selected: {fill: "#ccff00 1"},
+						  hatchFill: {
+							type:"weave",
+							color: "#ffff00"
+						  }
+						},
+						//#endregion
+						
+						{
+						  x: ['LANGUEDOC-NITRO', 'SEPTUFMANIE', 'VICTUS-ROUSSILLON'],
+						  value: victrufNombre,
+						  name: '',
+						  tooltipTitle: 'LANGUEDOC-NITRO & SEPTUFMANIE & VICTUS-ROUSSILLON',
+						  tooltipDesc: victrufText,
+						  normal: {fill: "#eeeeee 0.1"},
+						  hovered: {fill: "#eeeeee 1"},
+						  selected: {fill: "#eeeeee 1"},
 						  hatchFill: {
 							type:"weave",
 							color: "#ff0000"
@@ -263,17 +462,17 @@
 
 					  chart.container('containerVenn');
 					  chart.draw();
-					}
+				}
 
 			</script>
 
-			<br>
-			<br>
+			<p>
 			<fieldset>
 				<legend>Sélectionner les PC concernés</legend>
 				<div style="display: flex; justify-content: center; align-items: center; vertical-align: center;">
 					<input type="checkbox" id="nitroBox" value="LANGUEDOC-NITRO" style="accent-color: rgba(255,0,0);" onChange="laptopChanged()"><label style="font-family: NITRO; color: rgba(255,0,0); font-size: 18px; margin-right: 20px;">LANGUEDOC-NITRO</label>
 					<input type="checkbox" id="tufBox" value="SEPTUFMANIE" style="accent-color: rgba(255,192,0);" onChange="laptopChanged()"><label style="font-family: TUF; color: rgba(255,192,0); font-size: 18px; margin-right: 20px;">SEPTUFMANIE</label>
+					<input type="checkbox" id="victusBox" value="VICTUS-ROUSSILLON" style="accent-color: rgba(0,255,0);" onChange="laptopChanged()"><label style="font-family: VICTUS; color: rgba(0,255,0); font-size: 18px; margin-right: 20px;">VICTUS-ROUSSILLON</label>
 				</div>
 			</fieldset>
 		</main>
